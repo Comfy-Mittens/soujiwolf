@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EntitiesStoreContainer" CdmEntityContainer="SoujiwolfConnection">
+    <EntitySetMapping Name="ModeratorRoles">
+      <EntityTypeMapping TypeName="IsTypeOf(Entities.ModeratorRole)">
+        <MappingFragment StoreEntitySet="ModeratorRoles">
+          <ScalarProperty Name="GuildSnowflake" ColumnName="GuildSnowflake" />
+          <ScalarProperty Name="RoleSnowflake" ColumnName="RoleSnowflake" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Votes">
+      <EntityTypeMapping TypeName="IsTypeOf(Entities.Vote)">
+        <MappingFragment StoreEntitySet="Votes">
+          <ScalarProperty Name="GuildSnowflake" ColumnName="GuildSnowflake" />
+          <ScalarProperty Name="Voter" ColumnName="Voter" />
+          <ScalarProperty Name="Voted" ColumnName="Voted" />
+          <ScalarProperty Name="Changed" ColumnName="Changed" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WerewolfGame">
+      <EntityTypeMapping TypeName="IsTypeOf(Entities.Werewolf)">
+        <MappingFragment StoreEntitySet="WerewolfGame">
+          <ScalarProperty Name="GuildSnowflake" ColumnName="GuildSnowflake" />
+          <ScalarProperty Name="PlayerRoleSnowflake" ColumnName="PlayerRoleSnowflake" />
+          <ScalarProperty Name="NarratorRoleSnowflake" ColumnName="NarratorRoleSnowflake" />
+          <ScalarProperty Name="VillageChannelSnowflake" ColumnName="VillageChannelSnowflake" />
+          <ScalarProperty Name="WerewolfChannelSnowflake" ColumnName="WerewolfChannelSnowflake" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="DeadRoleSnowflake" ColumnName="DeadRoleSnowflake" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GameRoles">
+      <EntityTypeMapping TypeName="IsTypeOf(Entities.GameRole)">
+        <MappingFragment StoreEntitySet="GameRoles">
+          <ScalarProperty Name="GuildSnowflake" ColumnName="GuildSnowflake" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Color" ColumnName="Color" />
+          <ScalarProperty Name="ThumbnailImage" ColumnName="ThumbnailImage" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Active" ColumnName="Active" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="Affinity" ColumnName="Affinity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PlayerRoles">
+      <EntityTypeMapping TypeName="IsTypeOf(Entities.PlayerRole)">
+        <MappingFragment StoreEntitySet="PlayerRoles">
+          <ScalarProperty Name="PlayerSnowflake" ColumnName="PlayerSnowflake" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Broadcasts">
+      <EntityTypeMapping TypeName="IsTypeOf(Entities.Broadcast)">
+        <MappingFragment StoreEntitySet="Broadcasts">
+          <ScalarProperty Name="BroadcastId" ColumnName="BroadcastId" />
+          <ScalarProperty Name="GuildSnowflake" ColumnName="GuildSnowflake" />
+          <ScalarProperty Name="ChannelSnowflake" ColumnName="ChannelSnowflake" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BroadcastListeners">
+      <EntityTypeMapping TypeName="IsTypeOf(Entities.BroadcastListener)">
+        <MappingFragment StoreEntitySet="BroadcastListeners">
+          <ScalarProperty Name="GuildSnowflake" ColumnName="GuildSnowflake" />
+          <ScalarProperty Name="ChannelSnowflake" ColumnName="ChannelSnowflake" />
+          <ScalarProperty Name="BroadcastBroadcastId" ColumnName="BroadcastBroadcastId" />
+          <ScalarProperty Name="BroadcastGuildSnowflake" ColumnName="BroadcastGuildSnowflake" />
+          <ScalarProperty Name="BroadcastChannelSnowflake" ColumnName="BroadcastChannelSnowflake" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="PlayerRoleGameRole" TypeName="Entities.PlayerRoleGameRole" StoreEntitySet="PlayerRoles">
+      <EndProperty Name="GameRole">
+        <ScalarProperty Name="GuildSnowflake" ColumnName="GameRole_GuildSnowflake" />
+        <ScalarProperty Name="Name" ColumnName="GameRole_Name" />
+      </EndProperty>
+      <EndProperty Name="PlayerRole">
+        <ScalarProperty Name="PlayerSnowflake" ColumnName="PlayerSnowflake" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

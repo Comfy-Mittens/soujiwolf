@@ -1,0 +1,125 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Entities.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="EntitiesStoreContainer">
+    <EntitySet Name="ModeratorRoles" EntityType="Entities.Store.ModeratorRoles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Votes" EntityType="Entities.Store.Votes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="WerewolfGame" EntityType="Entities.Store.WerewolfGame" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GameRoles" EntityType="Entities.Store.GameRoles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PlayerRoles" EntityType="Entities.Store.PlayerRoles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Broadcasts" EntityType="Entities.Store.Broadcasts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="BroadcastListeners" EntityType="Entities.Store.BroadcastListeners" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="PlayerRoleGameRole" Association="Entities.Store.PlayerRoleGameRole">
+      <End Role="PlayerRole" EntitySet="PlayerRoles" />
+      <End Role="GameRole" EntitySet="GameRoles" />
+    </AssociationSet>
+    <AssociationSet Name="BroadcastListenerBroadcast" Association="Entities.Store.BroadcastListenerBroadcast">
+      <End Role="BroadcastListener" EntitySet="BroadcastListeners" />
+      <End Role="Broadcast" EntitySet="Broadcasts" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ModeratorRoles">
+    <Key>
+      <PropertyRef Name="GuildSnowflake" />
+      <PropertyRef Name="RoleSnowflake" />
+    </Key>
+    <Property Name="GuildSnowflake" Type="bigint" Nullable="false" />
+    <Property Name="RoleSnowflake" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Votes">
+    <Key>
+      <PropertyRef Name="GuildSnowflake" />
+      <PropertyRef Name="Voter" />
+    </Key>
+    <Property Name="GuildSnowflake" Type="bigint" Nullable="false" />
+    <Property Name="Voter" Type="bigint" Nullable="false" />
+    <Property Name="Voted" Type="bigint" Nullable="false" />
+    <Property Name="Changed" Type="bool" Nullable="false" />
+  </EntityType>
+  <EntityType Name="WerewolfGame">
+    <Key>
+      <PropertyRef Name="GuildSnowflake" />
+    </Key>
+    <Property Name="GuildSnowflake" Type="bigint" Nullable="false" />
+    <Property Name="PlayerRoleSnowflake" Type="bigint" Nullable="false" />
+    <Property Name="NarratorRoleSnowflake" Type="bigint" Nullable="false" />
+    <Property Name="VillageChannelSnowflake" Type="bigint" Nullable="false" />
+    <Property Name="WerewolfChannelSnowflake" Type="bigint" Nullable="false" />
+    <Property Name="Status" Type="longtext" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GameRoles">
+    <Key>
+      <PropertyRef Name="GuildSnowflake" />
+      <PropertyRef Name="Name" />
+    </Key>
+    <Property Name="GuildSnowflake" Type="bigint" Nullable="false" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="Color" Type="bigint" Nullable="false" />
+    <Property Name="ThumbnailImage" Type="longtext" Nullable="false" />
+    <Property Name="Description" Type="longtext" Nullable="false" />
+    <Property Name="Active" Type="bool" Nullable="false" />
+    <Property Name="Rate" Type="double" Nullable="true" />
+    <Property Name="Affinity" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PlayerRoles">
+    <Key>
+      <PropertyRef Name="PlayerSnowflake" />
+    </Key>
+    <Property Name="PlayerSnowflake" Type="bigint" Nullable="false" />
+    <Property Name="GameRole_GuildSnowflake" Type="bigint" Nullable="false" />
+    <Property Name="GameRole_Name" Type="varchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Broadcasts">
+    <Key>
+      <PropertyRef Name="BroadcastId" />
+      <PropertyRef Name="GuildSnowflake" />
+      <PropertyRef Name="ChannelSnowflake" />
+    </Key>
+    <Property Name="BroadcastId" Type="guid" Nullable="false" />
+    <Property Name="GuildSnowflake" Type="bigint" Nullable="false" />
+    <Property Name="ChannelSnowflake" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BroadcastListeners">
+    <Key>
+      <PropertyRef Name="GuildSnowflake" />
+      <PropertyRef Name="ChannelSnowflake" />
+      <PropertyRef Name="BroadcastBroadcastId" />
+      <PropertyRef Name="BroadcastGuildSnowflake" />
+      <PropertyRef Name="BroadcastChannelSnowflake" />
+    </Key>
+    <Property Name="GuildSnowflake" Type="bigint" Nullable="false" />
+    <Property Name="ChannelSnowflake" Type="bigint" Nullable="false" />
+    <Property Name="BroadcastBroadcastId" Type="guid" Nullable="false" />
+    <Property Name="BroadcastGuildSnowflake" Type="bigint" Nullable="false" />
+    <Property Name="BroadcastChannelSnowflake" Type="bigint" Nullable="false" />
+  </EntityType>
+  <Association Name="PlayerRoleGameRole">
+    <End Role="PlayerRole" Type="Entities.Store.PlayerRoles" Multiplicity="*" />
+    <End Role="GameRole" Type="Entities.Store.GameRoles" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="GameRole">
+        <PropertyRef Name="GuildSnowflake" />
+        <PropertyRef Name="Name" />
+      </Principal>
+      <Dependent Role="PlayerRole">
+        <PropertyRef Name="GameRole_GuildSnowflake" />
+        <PropertyRef Name="GameRole_Name" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="BroadcastListenerBroadcast">
+    <End Role="BroadcastListener" Type="Entities.Store.BroadcastListeners" Multiplicity="*" />
+    <End Role="Broadcast" Type="Entities.Store.Broadcasts" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Broadcast">
+        <PropertyRef Name="BroadcastId" />
+        <PropertyRef Name="GuildSnowflake" />
+        <PropertyRef Name="ChannelSnowflake" />
+      </Principal>
+      <Dependent Role="BroadcastListener">
+        <PropertyRef Name="BroadcastBroadcastId" />
+        <PropertyRef Name="BroadcastGuildSnowflake" />
+        <PropertyRef Name="BroadcastChannelSnowflake" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ed5cd1e477fc494e8e4cdf43c022dde2" Name="Diagram1" DisplayType="true" >
+        <EntityTypeShape EntityType="Entities.ModeratorRole" Width="2.25" PointX="0.875" PointY="2.875" />
+        <EntityTypeShape EntityType="Entities.Vote" Width="2" PointX="2.375" PointY="0.5" />
+        <EntityTypeShape EntityType="Entities.Werewolf" Width="2.625" PointX="6.25" PointY="0.5" />
+        <EntityTypeShape EntityType="Entities.GameRole" Width="2.75" PointX="3.75" PointY="2.875" />
+        <EntityTypeShape EntityType="Entities.PlayerRole" Width="3.25" PointX="8.625" PointY="3" />
+        <AssociationConnector Association="Entities.PlayerRoleGameRole" />
+        <EntityTypeShape EntityType="Entities.Broadcast" Width="3.25" PointX="5.125" PointY="6.25" />
+        <EntityTypeShape EntityType="Entities.BroadcastListener" Width="2.625" PointX="9.125" PointY="6.25" />
+        <AssociationConnector Association="Entities.BroadcastListenerBroadcast" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
