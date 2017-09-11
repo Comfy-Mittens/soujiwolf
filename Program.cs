@@ -20,7 +20,7 @@ namespace Soujiwolf
     {
         static void Main(string[] args) => new Program().MainAsync().GetAwaiter().GetResult();
 
-        private const string TOKEN = "MzEzNTI4ODYyOTU0NzQ5OTUy.C_q8BA.r0nY1wYcMvdXg1-KoQZ7FWRcJBM";
+        private const string TOKEN = "Ooops"; // TODO: Store in config
 
         #region Properties
         public DiscordSocketClient Client { get; set; }
